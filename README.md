@@ -150,7 +150,7 @@ mkdir -p data/raw/f1db-v2026.20.0/csv && curl -L -o data/raw/f1db-v2026.20.0/f1d
 predictions for the website, so run it first. To update after a new race, download the
 newer F1DB release into its own folder, rerun the chain on it, and pass the release name
 and last race to `fit.py` (`--release "F1DB v2026.21.0" --through "2026 Las Vegas GP"`).
-Then rebuild and redeploy the website.
+Then commit and push: every push to `main` redeploys the website.
 
 ## The website
 
@@ -174,10 +174,12 @@ Run it locally (Node 22+):
 cd web && npm install && npm run dev
 ```
 
-Build and deploy (the folder is linked to the Vercel project `f1-equal-machinery`):
+Deploys are automatic. This repo is connected to the Vercel project `f1-equal-machinery`
+(root directory `web`), so every push to `main` builds and publishes the site, and pushes to
+other branches get preview links. To check a production build locally first:
 
 ```bash
-cd web && npx vercel build --prod && npx vercel deploy --prebuilt --prod
+cd web && npm run build && npm run preview
 ```
 
 `web/tools/shots.mjs` screenshots every page at desktop and phone sizes in both themes
