@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Raw F1DB download (see README, "Reproduce")
+data/raw/
+
+# Built pages
+viz/dist/
+
+# Web app
+node_modules/
+web/dist/
+.vercel/
+
+# Local tooling
+.claude/
