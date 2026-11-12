@@ -16,3 +16,6 @@ web/dist/
 
 # Local tooling
 .claude/
+
+# Local env files (Vercel writes tokens here)
+.env*

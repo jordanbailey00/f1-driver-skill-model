@@ -1,0 +1,24 @@
+{
+  "name": "f1-equal-machinery",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Website for the Equal Machinery F1 driver rating",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "shots": "node tools/shots.mjs",
+    "share-image": "node tools/share-image.mjs"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "@fontsource/saira-condensed": "5.3.0",
+    "d3": "7.9.0"
+  },
+  "devDependencies": {
+    "playwright-core": "1.56.1",
+    "vite": "8.3.5"
+  }
+}
