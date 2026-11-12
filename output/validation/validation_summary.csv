@@ -1,0 +1,61 @@
+kind,subset,method,type,n,accuracy,log_loss
+quali,all pairs,points per start,baseline,4566,0.5907796758650898,0.6705128626944257
+quali,all pairs,win rate,baseline,4566,0.5652650021901008,0.6797521359532374
+quali,all pairs,average finish,baseline,4532,0.5953221535745807,5.590831655186396
+quali,all pairs,raw teammate record,baseline,4566,0.6029347349978099,0.6643882943300727
+quali,all pairs,raw avg gap to teammate,baseline,4566,0.5959264126149802,0.6668835402953995
+quali,all pairs,full model,model,4566,0.6528690319754709,0.6386939368571554
+quali,all pairs,no era scale,model,4566,0.640604467805519,0.6423574453822365
+quali,all pairs,era scatter only (a % is a %),model,4566,0.6445466491458607,0.6474369656382414
+quali,all pairs,no age/experience curves,model,4566,0.6366622864651774,0.6569541455928203
+quali,all pairs,no season form,model,4566,0.6487078405606658,0.6437733487798687
+quali,new pairings,points per start,baseline,1996,0.5746492985971944,0.6780124844529427
+quali,new pairings,win rate,baseline,1996,0.5488476953907816,0.6863854023388175
+quali,new pairings,average finish,baseline,1962,0.5871559633027523,5.703651734939129
+quali,new pairings,raw teammate record,baseline,1996,0.5711422845691383,0.6851111960276469
+quali,new pairings,raw avg gap to teammate,baseline,1996,0.5686372745490982,5.959496856416146
+quali,new pairings,full model,model,1996,0.625751503006012,0.6635669394046274
+quali,new pairings,no era scale,model,1996,0.6112224448897795,0.6591047585186475
+quali,new pairings,era scatter only (a % is a %),model,1996,0.6172344689378757,0.6737675685205746
+quali,new pairings,no age/experience curves,model,1996,0.6097194388777555,0.7022398061657193
+quali,new pairings,no season form,model,1996,0.6222444889779559,0.6752818517561857
+race,all pairs,points per start,baseline,3051,0.5963618485742379,0.6662431264589951
+race,all pairs,win rate,baseline,3051,0.5721075057358244,0.6750722401566218
+race,all pairs,average finish,baseline,3036,0.6021080368906456,5.4970812193747545
+race,all pairs,raw teammate record,baseline,3051,0.5937397574565716,0.6693160136992867
+race,all pairs,raw avg gap to teammate,baseline,3051,0.5807931825630941,0.67475568439679
+race,all pairs,full model,model,3051,0.6240576860045887,0.6548758664492923
+race,all pairs,no era scale,model,3051,0.6191412651589643,0.6720556496924966
+race,all pairs,era scatter only (a % is a %),model,3051,0.618813503769256,0.6577476492096072
+race,all pairs,no age/experience curves,model,3051,0.621107833497214,0.6746708935115948
+race,all pairs,no season form,model,3051,0.6253687315634219,0.6625061973315186
+race,new pairings,points per start,baseline,1261,0.5785091197462332,0.6751162842888184
+race,new pairings,win rate,baseline,1261,0.5602696272799366,0.6876087491027826
+race,new pairings,average finish,baseline,1246,0.5754414125200642,5.865494223245152
+race,new pairings,raw teammate record,baseline,1261,0.5713719270420301,0.6839323651548563
+race,new pairings,raw avg gap to teammate,baseline,1261,0.5606661379857256,6.069622169795845
+race,new pairings,full model,model,1261,0.5828707375099128,0.688515905943395
+race,new pairings,no era scale,model,1261,0.578112609040444,0.7138441529382857
+race,new pairings,era scatter only (a % is a %),model,1261,0.578112609040444,0.6895226408152713
+race,new pairings,no age/experience curves,model,1261,0.5852498017446471,0.7326648000227449
+race,new pairings,no season form,model,1261,0.591593973037272,0.6998448065087088
+season quali H2H,all pairs,points per start,baseline,370,0.5756756756756757,
+season quali H2H,all pairs,win rate,baseline,370,0.5594594594594594,
+season quali H2H,all pairs,average finish,baseline,366,0.5683060109289617,
+season quali H2H,all pairs,raw teammate record,baseline,370,0.5878378378378378,
+season quali H2H,all pairs,raw avg gap to teammate,baseline,370,0.5891891891891892,
+season quali H2H,all pairs,full model,model,370,0.6297297297297297,
+season quali H2H,all pairs,no era scale,model,370,0.6378378378378379,
+season quali H2H,all pairs,era scatter only (a % is a %),model,370,0.6297297297297297,
+season quali H2H,all pairs,no age/experience curves,model,370,0.6135135135135135,
+season quali H2H,all pairs,no season form,model,370,0.6351351351351351,
+season quali H2H,new pairings,points per start,baseline,160,0.571875,
+season quali H2H,new pairings,win rate,baseline,160,0.546875,
+season quali H2H,new pairings,average finish,baseline,156,0.5641025641025641,
+season quali H2H,new pairings,raw teammate record,baseline,160,0.565625,
+season quali H2H,new pairings,raw avg gap to teammate,baseline,160,0.5625,
+season quali H2H,new pairings,full model,model,160,0.625,
+season quali H2H,new pairings,no era scale,model,160,0.65,
+season quali H2H,new pairings,era scatter only (a % is a %),model,160,0.6375,
+season quali H2H,new pairings,no age/experience curves,model,160,0.60625,
+season quali H2H,new pairings,no season form,model,160,0.6375,

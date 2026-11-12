@@ -1,0 +1,542 @@
+[
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "points per start",
+  "type": "baseline",
+  "n": 4566,
+  "accuracy": 0.5907796758650898,
+  "log_loss": 0.6705128626944257
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "win rate",
+  "type": "baseline",
+  "n": 4566,
+  "accuracy": 0.5652650021901008,
+  "log_loss": 0.6797521359532374
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "average finish",
+  "type": "baseline",
+  "n": 4532,
+  "accuracy": 0.5953221535745807,
+  "log_loss": 5.590831655186396
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "raw teammate record",
+  "type": "baseline",
+  "n": 4566,
+  "accuracy": 0.6029347349978099,
+  "log_loss": 0.6643882943300727
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "raw avg gap to teammate",
+  "type": "baseline",
+  "n": 4566,
+  "accuracy": 0.5959264126149802,
+  "log_loss": 0.6668835402953995
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "full model",
+  "type": "model",
+  "n": 4566,
+  "accuracy": 0.6528690319754709,
+  "log_loss": 0.6386939368571554
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "no era scale",
+  "type": "model",
+  "n": 4566,
+  "accuracy": 0.640604467805519,
+  "log_loss": 0.6423574453822365
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "era scatter only (a % is a %)",
+  "type": "model",
+  "n": 4566,
+  "accuracy": 0.6445466491458607,
+  "log_loss": 0.6474369656382414
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "no age/experience curves",
+  "type": "model",
+  "n": 4566,
+  "accuracy": 0.6366622864651774,
+  "log_loss": 0.6569541455928203
+ },
+ {
+  "kind": "quali",
+  "subset": "all pairs",
+  "method": "no season form",
+  "type": "model",
+  "n": 4566,
+  "accuracy": 0.6487078405606658,
+  "log_loss": 0.6437733487798687
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "points per start",
+  "type": "baseline",
+  "n": 1996,
+  "accuracy": 0.5746492985971944,
+  "log_loss": 0.6780124844529427
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "win rate",
+  "type": "baseline",
+  "n": 1996,
+  "accuracy": 0.5488476953907816,
+  "log_loss": 0.6863854023388175
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "average finish",
+  "type": "baseline",
+  "n": 1962,
+  "accuracy": 0.5871559633027523,
+  "log_loss": 5.703651734939129
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "raw teammate record",
+  "type": "baseline",
+  "n": 1996,
+  "accuracy": 0.5711422845691383,
+  "log_loss": 0.6851111960276469
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "raw avg gap to teammate",
+  "type": "baseline",
+  "n": 1996,
+  "accuracy": 0.5686372745490982,
+  "log_loss": 5.959496856416146
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "full model",
+  "type": "model",
+  "n": 1996,
+  "accuracy": 0.625751503006012,
+  "log_loss": 0.6635669394046274
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "no era scale",
+  "type": "model",
+  "n": 1996,
+  "accuracy": 0.6112224448897795,
+  "log_loss": 0.6591047585186475
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "era scatter only (a % is a %)",
+  "type": "model",
+  "n": 1996,
+  "accuracy": 0.6172344689378757,
+  "log_loss": 0.6737675685205746
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "no age/experience curves",
+  "type": "model",
+  "n": 1996,
+  "accuracy": 0.6097194388777555,
+  "log_loss": 0.7022398061657193
+ },
+ {
+  "kind": "quali",
+  "subset": "new pairings",
+  "method": "no season form",
+  "type": "model",
+  "n": 1996,
+  "accuracy": 0.6222444889779559,
+  "log_loss": 0.6752818517561857
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "points per start",
+  "type": "baseline",
+  "n": 3051,
+  "accuracy": 0.5963618485742379,
+  "log_loss": 0.6662431264589951
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "win rate",
+  "type": "baseline",
+  "n": 3051,
+  "accuracy": 0.5721075057358244,
+  "log_loss": 0.6750722401566218
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "average finish",
+  "type": "baseline",
+  "n": 3036,
+  "accuracy": 0.6021080368906456,
+  "log_loss": 5.4970812193747545
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "raw teammate record",
+  "type": "baseline",
+  "n": 3051,
+  "accuracy": 0.5937397574565716,
+  "log_loss": 0.6693160136992867
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "raw avg gap to teammate",
+  "type": "baseline",
+  "n": 3051,
+  "accuracy": 0.5807931825630941,
+  "log_loss": 0.67475568439679
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "full model",
+  "type": "model",
+  "n": 3051,
+  "accuracy": 0.6240576860045887,
+  "log_loss": 0.6548758664492923
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "no era scale",
+  "type": "model",
+  "n": 3051,
+  "accuracy": 0.6191412651589643,
+  "log_loss": 0.6720556496924966
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "era scatter only (a % is a %)",
+  "type": "model",
+  "n": 3051,
+  "accuracy": 0.618813503769256,
+  "log_loss": 0.6577476492096072
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "no age/experience curves",
+  "type": "model",
+  "n": 3051,
+  "accuracy": 0.621107833497214,
+  "log_loss": 0.6746708935115948
+ },
+ {
+  "kind": "race",
+  "subset": "all pairs",
+  "method": "no season form",
+  "type": "model",
+  "n": 3051,
+  "accuracy": 0.6253687315634219,
+  "log_loss": 0.6625061973315186
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "points per start",
+  "type": "baseline",
+  "n": 1261,
+  "accuracy": 0.5785091197462332,
+  "log_loss": 0.6751162842888184
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "win rate",
+  "type": "baseline",
+  "n": 1261,
+  "accuracy": 0.5602696272799366,
+  "log_loss": 0.6876087491027826
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "average finish",
+  "type": "baseline",
+  "n": 1246,
+  "accuracy": 0.5754414125200642,
+  "log_loss": 5.865494223245152
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "raw teammate record",
+  "type": "baseline",
+  "n": 1261,
+  "accuracy": 0.5713719270420301,
+  "log_loss": 0.6839323651548563
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "raw avg gap to teammate",
+  "type": "baseline",
+  "n": 1261,
+  "accuracy": 0.5606661379857256,
+  "log_loss": 6.069622169795845
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "full model",
+  "type": "model",
+  "n": 1261,
+  "accuracy": 0.5828707375099128,
+  "log_loss": 0.688515905943395
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "no era scale",
+  "type": "model",
+  "n": 1261,
+  "accuracy": 0.578112609040444,
+  "log_loss": 0.7138441529382857
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "era scatter only (a % is a %)",
+  "type": "model",
+  "n": 1261,
+  "accuracy": 0.578112609040444,
+  "log_loss": 0.6895226408152713
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "no age/experience curves",
+  "type": "model",
+  "n": 1261,
+  "accuracy": 0.5852498017446471,
+  "log_loss": 0.7326648000227449
+ },
+ {
+  "kind": "race",
+  "subset": "new pairings",
+  "method": "no season form",
+  "type": "model",
+  "n": 1261,
+  "accuracy": 0.591593973037272,
+  "log_loss": 0.6998448065087088
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "points per start",
+  "type": "baseline",
+  "n": 370,
+  "accuracy": 0.5756756756756757,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "win rate",
+  "type": "baseline",
+  "n": 370,
+  "accuracy": 0.5594594594594594,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "average finish",
+  "type": "baseline",
+  "n": 366,
+  "accuracy": 0.5683060109289617,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "raw teammate record",
+  "type": "baseline",
+  "n": 370,
+  "accuracy": 0.5878378378378378,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "raw avg gap to teammate",
+  "type": "baseline",
+  "n": 370,
+  "accuracy": 0.5891891891891892,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "full model",
+  "type": "model",
+  "n": 370,
+  "accuracy": 0.6297297297297297,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "no era scale",
+  "type": "model",
+  "n": 370,
+  "accuracy": 0.6378378378378379,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "era scatter only (a % is a %)",
+  "type": "model",
+  "n": 370,
+  "accuracy": 0.6297297297297297,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "no age/experience curves",
+  "type": "model",
+  "n": 370,
+  "accuracy": 0.6135135135135135,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "all pairs",
+  "method": "no season form",
+  "type": "model",
+  "n": 370,
+  "accuracy": 0.6351351351351351,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "points per start",
+  "type": "baseline",
+  "n": 160,
+  "accuracy": 0.571875,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "win rate",
+  "type": "baseline",
+  "n": 160,
+  "accuracy": 0.546875,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "average finish",
+  "type": "baseline",
+  "n": 156,
+  "accuracy": 0.5641025641025641,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "raw teammate record",
+  "type": "baseline",
+  "n": 160,
+  "accuracy": 0.565625,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "raw avg gap to teammate",
+  "type": "baseline",
+  "n": 160,
+  "accuracy": 0.5625,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "full model",
+  "type": "model",
+  "n": 160,
+  "accuracy": 0.625,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "no era scale",
+  "type": "model",
+  "n": 160,
+  "accuracy": 0.65,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "era scatter only (a % is a %)",
+  "type": "model",
+  "n": 160,
+  "accuracy": 0.6375,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "no age/experience curves",
+  "type": "model",
+  "n": 160,
+  "accuracy": 0.60625,
+  "log_loss": NaN
+ },
+ {
+  "kind": "season quali H2H",
+  "subset": "new pairings",
+  "method": "no season form",
+  "type": "model",
+  "n": 160,
+  "accuracy": 0.6375,
+  "log_loss": NaN
+ }
+]
