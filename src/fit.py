@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Fit the final model on every comparison and export ratings for the page.
+"""Fit the final model on every comparison and export ratings for the website.
 
 Usage: python -I src/fit.py <processed dir> <output dir>
 
 Writes ratings.csv, season_ratings.csv, teammates.csv and data.json (the
-page's data) into the output dir.
+website's data, read by web/) into the output dir. Run validate.py first:
+the website's calibration and accuracy charts come from its predictions.
 """
 import argparse
 import json
@@ -81,6 +82,104 @@ def teammate_records(qp, rp, lam_unit):
                         adj_gap=float(np.median(e["adj"])) if e["adj"] else np.nan,
                         first=yrs[0], last=yrs[-1], years=",".join(map(str, yrs))))
     return pd.DataFrame(out)
+
+
+def season_grid(ent, qp, rp, lam_unit, cons, years=range(1990, 2027)):
+    """Each season's teams, their race starters and the teammate battles inside them.
+
+    Pairs are stored once with a < b; qa/qb and ra/rb are each side's qualifying and
+    race wins, adj the median qualifying gap in today's terms (positive: a faster).
+    """
+    yrs = list(years)
+    st = ent[ent.started & ent.year.isin(yrs)]
+    pts = st.assign(p=st.points.fillna(0)).groupby(["year", "constructorId"]).p.sum()
+    best = st.groupby(["year", "constructorId"]).positionNumber.min()
+    starts = st.groupby(["year", "constructorId", "driverId"]).size()
+    q = qp[~qp.dropped_outlier & (qp.source == "qualifying") & qp.year.isin(yrs)].copy()
+    q["adj"] = q.gap / q.year.map(lam_unit)
+    r = rp[rp.outcome.notna() & (rp.source == "race") & rp.year.isin(yrs)]
+    pairs = {}
+
+    def rec(y, t, a, b):
+        lo, hi = sorted((a, b))
+        return pairs.setdefault((y, t, lo, hi), dict(a=lo, b=hi, qa=0, qb=0, ra=0, rb=0, adj=[])), a == lo
+    for x in q.itertuples():
+        e, fwd = rec(x.year, x.team, x.a, x.b)
+        g = x.adj if fwd else -x.adj
+        if g > 0:
+            e["qa"] += 1
+        elif g < 0:
+            e["qb"] += 1
+        e["adj"].append(g)
+    for x in r.itertuples():
+        e, fwd = rec(x.year, x.team, x.a, x.b)
+        won_a = (x.outcome == 1) == fwd
+        e["ra" if won_a else "rb"] += 1
+    out = []
+    for y in yrs:
+        teams = []
+        for t in pts.loc[y].index:
+            ds = starts.loc[(y, t)].sort_values(ascending=False)
+            ps = [dict(a=e["a"], b=e["b"], qa=e["qa"], qb=e["qb"], ra=e["ra"], rb=e["rb"],
+                       adj=round(float(np.median(e["adj"])), 3) if e["adj"] else None)
+                  for (yy, tt, _, _), e in pairs.items() if yy == y and tt == t]
+            teams.append(dict(id=t, name=cons.get(t, t), pts=float(pts.loc[(y, t)]),
+                              best=None if pd.isna(best.loc[(y, t)]) else int(best.loc[(y, t)]),
+                              drivers=[[d, int(n)] for d, n in ds.items()], pairs=ps))
+        teams.sort(key=lambda t: (-t["pts"], t["best"] if t["best"] is not None else 99))
+        out.append(dict(y=y, teams=teams))
+    return out
+
+
+def teammate_network(q, r, names):
+    """Every driver in the model and every teammate pairing that links two of them."""
+    yrs = pd.concat([pd.DataFrame({"d": df[c], "y": df.year}) for df in (q, r) for c in ("a", "b")])
+    first, last = yrs.groupby("d").y.min(), yrs.groupby("d").y.max()
+    ids = sorted(set(q.a) | set(q.b) | set(r.a) | set(r.b))
+    ix = {d: i for i, d in enumerate(ids)}
+    links = {}
+    for df, col in ((q, 0), (r, 1)):
+        for a, b, y in zip(df.a, df.b, df.year):
+            k = tuple(sorted((ix[a], ix[b])))
+            e = links.setdefault(k, [0, 0, y, y])
+            e[col] += 1
+            e[2], e[3] = min(e[2], y), max(e[3], y)
+    nodes = [[d, names.get(d, d), int(first.get(d, 0)), int(last.get(d, 0))] for d in ids]
+    return dict(nodes=nodes, links=[[i, j, *map(int, e)] for (i, j), e in sorted(links.items())])
+
+
+def gap_by_year(qp):
+    """How far apart teammates qualified, season by season (raw %, before the era scale)."""
+    q = qp[~qp.dropped_outlier & (qp.source == "qualifying")]
+    g = q.gap.abs().groupby(q.year)
+    return [dict(y=int(y), med=round(float(s.median()), 3), q1=round(float(s.quantile(0.25)), 3),
+                 q3=round(float(s.quantile(0.75)), 3), n=int(len(s))) for y, s in g]
+
+
+def validation_detail(val_dir):
+    """Calibration of the full model and accuracy season by season, from the saved predictions."""
+    P = pd.read_csv(os.path.join(val_dir, "validation_predictions.csv"))
+    cal, by_year = [], []
+    edges = np.round(np.arange(0.5, 1.0001, 0.05), 2)
+    for kind in ("quali", "race"):
+        s = P[P.kind == kind]
+        p, y = s["M:full model"].values, s.y.values
+        fav = np.maximum(p, 1 - p)
+        won = np.where(p >= 0.5, y, 1 - y)
+        idx = np.clip(np.digitize(fav, edges) - 1, 0, len(edges) - 2)
+        for i in range(len(edges) - 1):
+            m = idx == i
+            if m.any():
+                cal.append(dict(kind=kind, lo=float(edges[i]), hi=float(edges[i + 1]), p=round(float(fav[m].mean()), 4),
+                                obs=round(float(won[m].mean()), 4), n=int(m.sum())))
+        for yr, g in s.groupby("year"):
+            for meth in [c for c in s.columns if c.startswith("M:full") or c.startswith("B:")]:
+                v, yy = g[meth].values, g.y.values
+                ok = ~np.isnan(v)
+                thr = 0.5 if meth.startswith("M:") else 0.0
+                acc = np.mean(np.where(v[ok] == thr, 0.5, (v[ok] > thr) == (yy[ok] == 1)))
+                by_year.append(dict(kind=kind, y=int(yr), method=meth[2:], acc=round(float(acc), 4), n=int(ok.sum())))
+    return dict(calibration=cal, by_year=by_year)
 
 
 def main():
@@ -168,7 +267,7 @@ def main():
     seas.to_csv(os.path.join(O, "season_ratings.csv"), index=False)
     tm.to_csv(os.path.join(O, "teammates.csv"), index=False)
 
-    # ---- page data -------------------------------------------------------------
+    # ---- website data ------------------------------------------------------------
     show = car[car.ranked]
     keep = set(show.driverId)
     def r3(x):
@@ -213,6 +312,12 @@ def main():
         exp_curve=[dict(x=int(n), v=r3(k * m.exp_curve([n])[0])) for n in range(0, 101, 5)],
         age_curve=[dict(x=float(a_), v=r3(k * m.age_curve([a_])[0])) for a_ in np.arange(18, 46.5, 0.5)],
         validation=val.astype(object).where(val.notna(), None).to_dict("records"),
+        # for the website: season line-ups, the whole teammate network, raw gap sizes,
+        # and calibration / season-by-season accuracy from the validation run
+        season_grid=season_grid(ent, qp, rp, lam_unit, cons.to_dict()),
+        network=teammate_network(q, r, names),
+        gap_by_year=gap_by_year(qp),
+        validation_detail=validation_detail(os.path.join(O, "validation")),
     )
     with open(os.path.join(O, "data.json"), "w") as f:
         json.dump(payload, f, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
