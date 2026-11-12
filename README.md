@@ -5,8 +5,9 @@ scale using only comparisons where the car can't matter: two teammates, same car
 weekend. Those same-car gaps are chained through shared teammates, so drivers who never
 raced each other can still be compared.
 
-Interactive page: build it with `src/build_page.py` (see Reproduce) and open
-`viz/dist/index.html`.
+**Website: <https://f1-equal-machinery.vercel.app>**: rankings, driver pages, head to
+heads, a career timeline, season-by-season teammate battles, the teammate network, the
+method and the validation, all interactive.
 
 ## The ratio
 
@@ -145,14 +146,44 @@ mkdir -p data/raw/f1db-v2026.20.0/csv && curl -L -o data/raw/f1db-v2026.20.0/f1d
 .venv/bin/python -I src/fit.py data/processed output
 ```
 
+`validate.py` refits the model ~150 times and takes about 3 minutes; `fit.py` reads its
+predictions for the website, so run it first. To update after a new race, download the
+newer F1DB release into its own folder, rerun the chain on it, and pass the release name
+and last race to `fit.py` (`--release "F1DB v2026.21.0" --through "2026 Las Vegas GP"`).
+Then rebuild and redeploy the website.
+
+## The website
+
+`web/` is a static Vite + D3 site that reads `output/data.json` (written by `fit.py`).
+Every page has its own URL, so any driver, pairing or season can be linked directly.
+
+| Page | What it shows |
+|---|---|
+| Rankings | Every driver with their 90% range; by overall rating, one-lap pace or race day |
+| Driver pages | Season-by-season level, record against every teammate, nearest rivals |
+| Head to head | Expected gap in identical cars, odds, both careers, the teammate chain |
+| Timeline | Every career on one scale, as career ratings or season by season |
+| Seasons | Every team's teammate battle, 1990–2026, and the best single seasons |
+| Network | All 722 teammate pairings since 1977 as one zoomable web |
+| Method | How the rating is built, with the gap, era, learning and ageing curves |
+| Does it work? | Accuracy against career numbers, calibration, accuracy by era |
+
+Run it locally (Node 22+):
+
 ```bash
-.venv/bin/python -I src/build_page.py output/data.json viz/page.html viz/dist
+cd web && npm install && npm run dev
 ```
 
-`validate.py` refits the model ~150 times and takes about 3 minutes; `fit.py` reads its
-summary for the page, so run it first. To update after a new race, download the newer
-F1DB release into its own folder, rerun the chain on it, and pass the release name and
-last race to `fit.py` (`--release "F1DB v2026.21.0" --through "2026 Las Vegas GP"`).
+Build and deploy (the folder is linked to the Vercel project `f1-equal-machinery`):
+
+```bash
+cd web && npx vercel build --prod && npx vercel deploy --prebuilt --prod
+```
+
+`web/tools/shots.mjs` screenshots every page at desktop and phone sizes in both themes
+and reports page errors and overflow; `web/tools/share-image.mjs` redraws the link-preview
+image (`web/public/og.png`) from the current data. Both use Playwright's Chromium and the
+running dev server.
 
 ## Files
 
@@ -161,9 +192,8 @@ last race to `fit.py` (`--release "F1DB v2026.21.0" --through "2026 Las Vegas GP
 | `src/build_dataset.py` | F1DB CSVs → same-car qualifying and race comparisons |
 | `src/model.py` | The rating model (likelihood, priors, curves, era scale) |
 | `src/validate.py` | Season-by-season prediction test against career stats |
-| `src/fit.py` | Final fit; writes `output/*.csv` and the page data |
-| `src/build_page.py` | Inlines the data into the page |
-| `viz/page.html` | Page template (D3) |
+| `src/fit.py` | Final fit; writes `output/*.csv` and the website data |
+| `web/` | The website (Vite + D3) |
 | `output/ratings.csv` | Every driver: rating, range, pace, racecraft, rank |
 | `output/season_ratings.csv` | Each driver's delivered level, season by season |
 | `output/teammates.csv` | Head-to-head record for every teammate pairing |
